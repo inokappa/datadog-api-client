@@ -127,7 +127,7 @@ $ bundle exec ruby bin/hachiko \
   -f `date -d '10 minutes ago' +%s` \
   -t `date +%s` -q foo.bar.baz{host:host01} \
 | python -m json.tool
-``
+```
 
 output(Does not include poinits).
 
