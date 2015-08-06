@@ -18,6 +18,7 @@ module Hachiko
       @metric_name  = args[:metric]
       @points       = args[:points]
       @host_name    = args[:server]
+      @tags         = args[:tags].split(",")
 
     end
     
@@ -39,6 +40,21 @@ module Hachiko
     
     def put_metrics
       dog.emit_point(@metric_name, @points, :host => @host_name)
+    end
+
+    def tags
+      # Get All tags
+      unless @host_name 
+        dog.all_tags()
+      else
+	unless @tags
+          # Get host tags
+          dog.host_tags(@host_name)
+	else
+	  # Add host tags
+          dog.add_tags(@host_name, @tags)
+	end
+      end
     end
 
     def search

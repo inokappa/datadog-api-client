@@ -11,8 +11,9 @@ OptionParser.new do |opt|
   opt.on('-m', '--metric=NAME',    "Metric Name. ex: some.metric.name")                                              {|v| options[:metric] = v}
   opt.on('-p', '--points=VALUE',   "Metric Value or Values. ex: 12345 or [[POSIX_timestamp, numeric_value]]")        {|v| options[:points] = v}
   opt.on('-s', '--server=Name',    "Host Name. ex: foo.example.com")                                                 {|v| options[:server] = v}
+  opt.on('-t', '--tags=Tag Names', "Tag Name or Names. ex: role:foo")                                                {|v| options[:tags] = v}
 
   opt.parse!(ARGV)
 end
 
-DatadogApiClient.run(options)
+Hachiko.run(options)
