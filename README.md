@@ -97,7 +97,7 @@ output.
 $ bundle exec ruby bin/hachiko \
   -e metrics \ 
   -m foo.bar.baz \
-  --host=host01 \
+  --server=host01 \
   -p $RANDOM
 ```
 
@@ -107,6 +107,10 @@ output.
 202
 {"status"=>"ok"}
 ```
+
+dashboard.
+
+![dashboard](https://raw.githubusercontent.com/inokappa/datadog-api-client/master/images/2015080601.png)
 
 ### Fetch metrics(Query time series points)
 
