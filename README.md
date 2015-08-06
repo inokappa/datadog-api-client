@@ -100,6 +100,10 @@ output.
 {"status"=>"ok"}
 ```
 
+dashboard.
+
+![dashboard](https://raw.githubusercontent.com/inokappa/datadog-api-client/master/images/2015080601.png)
+
 ### Fetch metrics(Query time series points)
 
 ```sh
