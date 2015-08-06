@@ -2,7 +2,14 @@
 
 ## About
 
-Hachiko is yet another Datadog API Client.
+### Hachiko is ...
+
+Yet another Datadog API Client.
+
+### Supported API Endpoint
+
+- [Search](http://docs.datadoghq.com/ja/api/#search)
+- [Metrics](http://docs.datadoghq.com/ja/api/#metrics)
 
 ***
 
@@ -11,7 +18,7 @@ Hachiko is yet another Datadog API Client.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'datadog_api_client'
+gem 'hachiko'
 ```
 
 And then execute:
@@ -20,7 +27,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install datadog_api_client
+    $ gem install hachiko
 
 ***
 
@@ -38,7 +45,7 @@ $ export DATADOG_APP_KEY=<your_app_key>
 ```sh
 $ bundle exec ruby bin/hachiko -h
 Usage: datadog-api-client [options]
-    -e, --endpoint=NAME              API Endpoint Name. ex: metric ... Please see http://docs.datadoghq.com/ja/api/
+    -e, --endpoint=NAME              API Endpoint Name. ex: metrics ... Please see http://docs.datadoghq.com/ja/api/
     -f, --from=VALUE                 From Epoch Time. ex: `date -d '5 minutes ago' +%s`
     -t, --to=VALUE                   To Epoch Time. ex: `date +%s`
     -q, --query=VALUE                Query String. ex: system.cpu.idle{*}by{host}
