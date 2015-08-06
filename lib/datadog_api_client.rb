@@ -8,11 +8,11 @@ module DatadogApiClient
       client = DdApiClient.new(args)
 
       if args[:endpoint] == "search"
-        res = client.search
+        puts client.search
       elsif args[:endpoint] == "metrics"
-        res = client.get_metrics
+        puts client.get_metrics
       elsif args[:endpoint] == "metrics"
-        res = client.put_metrics
+        puts client.put_metrics
       else
         puts "Please set API endpoint."
       end

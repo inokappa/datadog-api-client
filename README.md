@@ -1,9 +1,5 @@
 # DatadogApiClient
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/datadog_api_client`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -25,15 +21,53 @@ Or install it yourself as:
 ### Set API Key and APP Key
 
 ```sh
-export DATADOG_API_KEY=<your_api_key>
-export DATADOG_APP_KEY=<your_app_key>
+$ export DATADOG_API_KEY=<your_api_key>
+$ export DATADOG_APP_KEY=<your_app_key>
 ```
 
-## Development
+### Get available host list
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```sh
+$ bundle exec ruby bin/datadog-api-client.rb -e search -q hosts: | python -m json.tool
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+output.
+
+```javascript
+{
+    "results": {
+        "hosts": [
+            "host01",
+            "host02"
+        ]
+    }
+}
+```
+
+### Get available metrics List
+
+```sh
+$ bundle exec ruby bin/datadog-api-client.rb -e search -q metrics: | python -m json.tool
+```
+
+output.
+
+```javascript
+{
+    "results": {
+        "metrics": [
+            "datadog.agent.emitter.emit.time",
+            "ntp.offset",
+            "collection_timestamp",
+            "datadog.dogstatsd.packet.count",
+            "docker.containers.running",
+(snip)
+            "system.swap.used",
+            "system.uptime"
+        ]
+    }
+}
+```
 
 ## Contributing
 

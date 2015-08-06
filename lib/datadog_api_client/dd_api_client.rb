@@ -9,8 +9,12 @@ module DatadogApiClient
       require 'time'
       require 'optparse'
 
-      api_key = ENV["DATADOG_API_KEY"]
-      app_key = ENV["DATADOG_APP_KEY"]
+      @api_key = ENV["DATADOG_API_KEY"]
+      @app_key = ENV["DATADOG_APP_KEY"]
+
+      @from    = args[:from]
+      @to      = args[:to]
+      @query   = args[:query]
 
     end
     
@@ -34,6 +38,8 @@ module DatadogApiClient
     end
 
     def search
+      result = dog.search(@query)
+      result[1].to_json
     end
 
   end
