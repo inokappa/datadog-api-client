@@ -89,7 +89,7 @@ output.
 $ bundle exec ruby bin/datadog-api-client.rb \
   -e metrics \ 
   -m foo.bar.baz \
-  --host=host01 \
+  --server=host01 \
   -p $RANDOM
 ```
 
