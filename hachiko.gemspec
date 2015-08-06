@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'datadog_api_client/version'
+require 'hachiko/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "datadog_api_client"
+  spec.name          = "hachiko"
   spec.version       = DatadogApiClient::VERSION
   spec.authors       = ["TODO: Write your name"]
   spec.email         = ["inokara@gmail.com"]

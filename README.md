@@ -1,4 +1,10 @@
-# DatadogApiClient
+# Hachiko
+
+## About
+
+Hachiko is yet another Datadog API Client.
+
+***
 
 ## Installation
 
@@ -16,6 +22,8 @@ Or install it yourself as:
 
     $ gem install datadog_api_client
 
+***
+
 ## Usage
 
 ### Set API key and APP key
@@ -28,7 +36,7 @@ $ export DATADOG_APP_KEY=<your_app_key>
 ### Command line help
 
 ```sh
-$ bundle exec ruby bin/datadog-api-client.rb -h
+$ bundle exec ruby bin/hachiko -h
 Usage: datadog-api-client [options]
     -e, --endpoint=NAME              API Endpoint Name. ex: metric ... Please see http://docs.datadoghq.com/ja/api/
     -f, --from=VALUE                 From Epoch Time. ex: `date -d '5 minutes ago' +%s`
@@ -42,7 +50,7 @@ Usage: datadog-api-client [options]
 ### Get available host list
 
 ```sh
-$ bundle exec ruby bin/datadog-api-client.rb -e search -q hosts: | python -m json.tool
+$ bundle exec ruby bin/hachiko -e search -q hosts: | python -m json.tool
 ```
 
 output.
@@ -61,7 +69,7 @@ output.
 ### Get available metrics List
 
 ```sh
-$ bundle exec ruby bin/datadog-api-client.rb -e search -q metrics: | python -m json.tool
+$ bundle exec ruby bin/hachiko -e search -q metrics: | python -m json.tool
 ```
 
 output.
@@ -86,7 +94,7 @@ output.
 ### Post metrics(Post time series points)
 
 ```sh
-$ bundle exec ruby bin/datadog-api-client.rb \
+$ bundle exec ruby bin/hachiko \
   -e metrics \ 
   -m foo.bar.baz \
   --host=host01 \
@@ -103,7 +111,7 @@ output.
 ### Fetch metrics(Query time series points)
 
 ```sh
-$ bundle exec ruby bin/datadog-api-client.rb \
+$ bundle exec ruby bin/hachiko \
   -e metrics \
   -f `date -d '10 minutes ago' +%s` \
   -t `date +%s` -q foo.bar.baz{host:host01} \
@@ -171,5 +179,5 @@ output(Include poinits).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/datadog_api_client.
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/hachiko.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "datadog_api_client"
+require "hachiko"
 
 options={}
 OptionParser.new do |opt|

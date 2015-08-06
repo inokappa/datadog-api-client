@@ -1,11 +1,11 @@
-require "datadog_api_client/version"
-require "datadog_api_client/dd_api_client"
+require "hachiko/version"
+require "hachiko/client"
 
-module DatadogApiClient
+module Hachiko
   class << self
 
     def run(args)
-      client = DdApiClient.new(args)
+      client = Client.new(args)
       if args[:endpoint] == "search"
         puts client.search
       elsif args[:endpoint] == "metrics" && args[:metric] && args[:server] && args[:points]

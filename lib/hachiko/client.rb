@@ -1,5 +1,5 @@
-module DatadogApiClient
-  class DdApiClient
+module Hachiko
+  class Client
     
     def initialize(args)
       require 'dogapi'
