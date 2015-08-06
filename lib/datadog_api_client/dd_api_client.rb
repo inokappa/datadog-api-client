@@ -17,7 +17,7 @@ module DatadogApiClient
       @query        = args[:query]
       @metric_name  = args[:metric]
       @points       = args[:points]
-      @host_name    = args[:host]
+      @host_name    = args[:server]
 
     end
     
@@ -38,7 +38,7 @@ module DatadogApiClient
     end
     
     def put_metrics
-      result = dog.emit_point(@metric_name, @points, :host => @host_name)
+      dog.emit_point(@metric_name, @points, :host => @host_name)
     end
 
     def search
