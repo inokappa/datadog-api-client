@@ -9,12 +9,15 @@ module DatadogApiClient
       require 'time'
       require 'optparse'
 
-      @api_key = ENV["DATADOG_API_KEY"]
-      @app_key = ENV["DATADOG_APP_KEY"]
+      @api_key      = ENV["DATADOG_API_KEY"]
+      @app_key      = ENV["DATADOG_APP_KEY"]
 
-      @from    = args[:from]
-      @to      = args[:to]
-      @query   = args[:query]
+      @from         = args[:from]
+      @to           = args[:to]
+      @query        = args[:query]
+      @metric_name  = args[:metric]
+      @points       = args[:points]
+      @host_name    = args[:host]
 
     end
     
@@ -23,18 +26,19 @@ module DatadogApiClient
     end
     
     def get_metrics
-      RestClient.get 'https://app.datadoghq.com/api/v1/query', {
+      result = RestClient.get 'https://app.datadoghq.com/api/v1/query', {
         :params => {
-          :api_key => api_key,
-          :application_key => app_key,
-          :from => option[:from],
-          :to => option[:to],
-          :query => option[:query]
+          :api_key => @api_key,
+          :application_key => @app_key,
+          :from => @from,
+          :to => @to,
+          :query => @query
         }
       }
     end
     
     def put_metrics
+      result = dog.emit_point(@metric_name, @points, :host => @host_name)
     end
 
     def search
