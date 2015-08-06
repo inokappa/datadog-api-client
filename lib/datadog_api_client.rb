@@ -3,15 +3,20 @@ require "datadog_api_client/dd_api_client"
 
 module DatadogApiClient
   class << self
+
     def run(args)
-      client = KvClient.new(args)
-      if args[1] == 'list'
-        puts client.listkv
-      elsif args[1] == 'put'
-        puts client.putkv
-      elsif args[1] == 'delete'
-        puts client.deletekv
+      client = DdApiClient.new(args)
+
+      if args[:endpoint] == "search"
+        res = client.search
+      elsif args[:endpoint] == "metrics"
+        res = client.get_metrics
+      elsif args[:endpoint] == "metrics"
+        res = client.put_metrics
+      else
+        puts "Please set API endpoint."
       end
     end
+
   end
 end
