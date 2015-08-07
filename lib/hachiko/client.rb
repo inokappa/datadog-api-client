@@ -16,27 +16,36 @@ module Hachiko
       @points       = args[:points]
       @host_name    = args[:server]
       @tags         = args[:tags]
-
+      @message      = args[:message]
+      
     end
     
     def dog
       Dogapi::Client.new(@api_key, @app_key)
     end
     
-    def get_metrics
-      result = RestClient.get 'https://app.datadoghq.com/api/v1/query', {
+    def get_metrics(from, to, query)
+      RestClient.get 'https://app.datadoghq.com/api/v1/query', {
         :params => {
           :api_key => @api_key,
           :application_key => @app_key,
-          :from => @from,
-          :to => @to,
-          :query => @query
+          :from => from,
+          :to => to,
+          :query => query
         }
       }
     end
     
-    def put_metrics
-      dog.emit_point(@metric_name, @points, :host => @host_name)
+    def put_metrics(metric_name, points, host_name)
+      dog.emit_point(metric_name, points, :host => host_name)
+    end
+
+    def metrics
+      if @metric_name && @host_name && @points
+        put_metrics(@metric_name, @points, @host_name)
+      elsif @from && @to && @query
+        get_metrics(@from, @to, @query)
+      end
     end
 
     def tags
@@ -65,6 +74,17 @@ module Hachiko
     def search
       result = dog.search(@query)
       result[1].to_json
+    end
+
+    def mute_host
+      # I'll change @query to @action
+      if !@message && @host_name && @query == "unmute"
+        result = dog.unmute_host(@host_name)
+        result[1].to_json
+      elsif @message && @host_name && @to
+        result = dog.mute_host(@host_name, :message => @message, :end => @to)
+        result[1].to_json
+      end
     end
 
   end

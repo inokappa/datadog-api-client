@@ -8,12 +8,12 @@ module Hachiko
       client = Client.new(args)
       if args[:endpoint] == "search"
         puts client.search
-      elsif args[:endpoint] == "metrics" && args[:metric] && args[:server] && args[:points]
-        client.put_metrics
       elsif args[:endpoint] == "metrics"
-        client.get_metrics
+        puts client.metrics
       elsif args[:endpoint] == "tags"
         puts client.tags
+      elsif args[:endpoint] == "hosts"
+        puts client.mute_host
       else
         puts "Please check argument."
       end
