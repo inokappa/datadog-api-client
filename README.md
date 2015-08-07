@@ -44,15 +44,16 @@ $ export DATADOG_APP_KEY=<your_app_key>
 ### Command line help
 
 ```sh
-$ bundle exec ruby bin/hachiko -h
-Usage: datadog-api-client [options]
-    -e, --endpoint=NAME              API Endpoint Name. ex: metrics ... Please see http://docs.datadoghq.com/ja/api/
-    -f, --from=VALUE                 From Epoch Time. ex: `date -d '5 minutes ago' +%s`
-    -t, --to=VALUE                   To Epoch Time. ex: `date +%s`
+$ bundle exec ./bin/hachiko -h
+Usage: hachiko [options]
+    -e, --endpoint=NAME              API Endpoint Name. ex: metrics or search ... Please see http://docs.datadoghq.com/ja/api/
+        --from=VALUE                 From Epoch Time. ex: `date -d '5 minutes ago' +%s`
+        --to=VALUE                   To Epoch Time. ex: `date +%s`
     -q, --query=VALUE                Query String. ex: system.cpu.idle{*}by{host}
     -m, --metric=NAME                Metric Name. ex: some.metric.name
     -p, --points=VALUE               Metric Value or Values. ex: 12345 or [[POSIX_timestamp, numeric_value]]
     -s, --server=Name                Host Name. ex: foo.example.com
+    -t, --tags=Tag Names             Tag Name or Names. ex: role:foo or role:foo,role:bar
 ```
 
 ### Get available host list
@@ -125,8 +126,8 @@ dashboard.
 ```sh
 $ bundle exec ruby bin/hachiko \
   -e metrics \
-  -f `date -d '10 minutes ago' +%s` \
-  -t `date +%s` -q foo.bar.baz{host:host01} \
+  --from `date -d '10 minutes ago' +%s` \
+  --to `date +%s` -q foo.bar.baz{host:host01} \
 | python -m json.tool
 ```
 
