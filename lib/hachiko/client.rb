@@ -18,7 +18,7 @@ module Hachiko
       @metric_name  = args[:metric]
       @points       = args[:points]
       @host_name    = args[:server]
-      @tags         = args[:tags].split(",")
+      @tags         = args[:tags]
 
     end
     
@@ -44,17 +44,24 @@ module Hachiko
 
     def tags
       # Get All tags
-      unless @host_name 
-        dog.all_tags()
+      if !@host_name 
+        result = dog.all_tags()
+        result[1].to_json
+      elsif @host_name && @query == "detach"
+        result = dog.detach_tags(@host_name)
+        result[1].to_json
       else
-	unless @tags
+        unless @tags
           # Get host tags
-          dog.host_tags(@host_name)
-	else
-	  # Add host tags
-          dog.add_tags(@host_name, @tags)
-	end
-      end
+          result = dog.host_tags(@host_name)
+          result[1].to_json
+	    else
+	      # Add host tags
+          tags = @tags.split(",")
+          result = dog.add_tags(@host_name, tags)
+          result[1].to_json
+	    end
+     end
     end
 
     def search

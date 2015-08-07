@@ -10,6 +10,7 @@ Yet another Datadog API Client.
 
 - [Search](http://docs.datadoghq.com/ja/api/#search)
 - [Metrics](http://docs.datadoghq.com/ja/api/#metrics)
+- [Tags](http://docs.datadoghq.com/ja/api/#tags)
 
 ***
 
@@ -184,6 +185,85 @@ output(Include poinits).
     "status": "ok",
     "to_date": 1438869304000
 }
+```
+
+### Get tags and Get host tags
+
+Get all tags.
+
+```sh
+$ bundle exec ./bin/hachiko -e tags | python -m json.tool
+```
+
+output.
+
+```javascript
+
+{
+    "tags": {
+        "role:bar": [
+            "host01",
+            "host02"
+        ],
+        "role:baz": [
+            "host01",
+            "host02"
+        ],
+        "role:foo": [
+            "host01",
+            "host02"
+        ]
+    }
+}
+```
+
+Get host tags.
+
+```sh
+bundle exec ./bin/hachiko -e tags -s host01 | python -m json.tool
+```
+
+output.
+
+```javascript
+{
+    "tags": [
+        "role:foo",
+        "role:bar",
+        "role:baz"
+    ]
+}
+```
+
+### Add host tags
+
+```sh
+bundle exec ./bin/hachiko -e tags -s host01 -t role:foo,role:bar,role:baz | python -m json.tool
+```
+
+output.
+
+```javascript
+{
+    "host": "host01",
+    "tags": [
+        "role:foo",
+        "role:bar",
+        "role:baz"
+    ]
+}
+```
+
+### Delete host tags
+
+```sh
+bundle exec ./bin/hachiko -e tags -s host01 -q detach 
+```
+
+output.
+
+```javascript
+{}
 ```
 
 ***
