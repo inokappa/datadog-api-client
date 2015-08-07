@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require "hachiko"
+require 'optparse'
 
 options={}
 OptionParser.new do |opt|
