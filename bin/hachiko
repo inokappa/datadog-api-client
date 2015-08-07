@@ -13,6 +13,7 @@ OptionParser.new do |opt|
   opt.on('-p', '--points=VALUE',   "Metric Value or Values. ex: 12345 or [[POSIX_timestamp, numeric_value]]")        {|v| options[:points] = v}
   opt.on('-s', '--server=Name',    "Host Name. ex: foo.example.com")                                                 {|v| options[:server] = v}
   opt.on('-t', '--tags=Tag Names', "Tag Name or Names. ex: role:foo or role:foo,role:bar")                           {|v| options[:tags] = v}
+  opt.on('--message=Message',      "Mute Message. ex: Muting this host for a test.")                                 {|v| options[:message] = v}
 
   opt.parse!(ARGV)
 end

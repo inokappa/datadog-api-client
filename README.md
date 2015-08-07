@@ -11,6 +11,7 @@ Yet another Datadog API Client.
 - [Search](http://docs.datadoghq.com/ja/api/#search)
 - [Metrics](http://docs.datadoghq.com/ja/api/#metrics)
 - [Tags](http://docs.datadoghq.com/ja/api/#tags)
+- [Hosts](http://docs.datadoghq.com/ja/api/#hosts)
 
 ***
 
@@ -265,6 +266,39 @@ output.
 
 ```javascript
 {}
+```
+
+### Mute a host
+
+```sh
+$ bundle exec ruby bin/hachiko -e hosts --server=host01 --message="Mute test" --to `date -d '5 minutes' +%s` | jq .
+```
+
+output.
+
+```javascript
+{
+  "end": 1438915377,
+  "hostname": "host01",
+  "message": "Mute test",
+  "action": "Muted"
+}
+
+```
+
+### Unmute a host
+
+```sh
+$ bundle exec ruby bin/hachiko -e hosts --server=host01 --query=unmute | jq .
+```
+
+output.
+
+```javascript
+{
+  "hostname": "host01",
+  "action": "Unmuted"
+}
 ```
 
 ***
