@@ -13,7 +13,7 @@ module Hachiko
       elsif args[:endpoint] == "metrics"
         client.get_metrics
       elsif args[:endpoint] == "tags"
-        client.tags
+        puts client.tags
       else
         puts "Please check argument."
       end
