@@ -3,11 +3,8 @@ module Hachiko
     
     def initialize(args)
       require 'dogapi'
-      require 'json'
       require 'rest-client'
-      require 'date'
-      require 'time'
-      require 'optparse'
+      require 'json'
 
       @api_key      = ENV["DATADOG_API_KEY"]
       @app_key      = ENV["DATADOG_APP_KEY"]
@@ -43,11 +40,12 @@ module Hachiko
     end
 
     def tags
-      # Get All tags
       if !@host_name 
+        # Get all tags
         result = dog.all_tags()
         result[1].to_json
       elsif @host_name && @query == "detach"
+        # Detach all tags
         result = dog.detach_tags(@host_name)
         result[1].to_json
       else
@@ -55,12 +53,12 @@ module Hachiko
           # Get host tags
           result = dog.host_tags(@host_name)
           result[1].to_json
-	    else
-	      # Add host tags
+       else
+          # Add host tags
           tags = @tags.split(",")
           result = dog.add_tags(@host_name, tags)
           result[1].to_json
-	    end
+       end
      end
     end
 
